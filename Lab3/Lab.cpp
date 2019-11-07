@@ -63,7 +63,33 @@ void zadanie2(){
 		}	
 		cout<<endl;
 	}
+	system("pause");
+}
+int nwd(int a, int b){
+	int temp;
+    
+	while(b!=0)
+    {
+		temp = b;
+		b = a%b;
+		a = temp;	
+	}
 	
+    return a;	
+}
+int nww(int a, int b){
+	return (a*b)/nwd(a,b);
+}
+void zadanie3(){
+	system("CLS");
+	cout<<"-----------\n|Zadanie 3|\n-----------\n";
+	cout<<"Program wyliczajacy NWD i NWW dla podanych licz calkowitych a i b\n";
+	cout<<"Podaj a: ";
+	int a,b;
+	cin>>a;
+	cout<<"Podaj b: ";
+	cin>>b;
+	cout<<"NWD = "<<nwd(a,b)<<", a NWW = "<<nww(a,b)<<endl;
 	system("pause");
 }
 
@@ -76,7 +102,7 @@ bool dzialaj = true;
 	cout<<"\n-----------------\n|Wybierz zadanie|\n-----------------\n";
 	cout<<"1. Rysowanie choinki\n";
 	cout<<"2. Tabliczka mnozenia\n";
-	cout<<"3. \n";
+	cout<<"3. NWD i NWW\n";
 	cout<<"4. \n";
 	cout<<"5. \n";
 	cout<<"6. \n";
@@ -92,7 +118,9 @@ bool dzialaj = true;
 	case '2':
 		zadanie2();
 		break;
-	
+	case '3':
+		zadanie3();
+		break;	
 	case 27: 
 		dzialaj = false;
 		break;
