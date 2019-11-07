@@ -2,7 +2,7 @@
 Autor: Tomasz Rzymyszkiewicz
 Grupa: ŒR/P 15:15
 Temat: Zadania - Laboratorium 2
-Data: 24.10.2019
+Data: 30.10.2019
 */
 #include <iostream>
 #include <conio.h>
@@ -10,8 +10,9 @@ Data: 24.10.2019
 #include <windows.h>
 #include <stdio.h>
 #include <ctime>
+#include <iomanip>
 using namespace std;
-void zadanie1(){
+void zadanie1(){ //rozwi¹zywanie równania kwadratowego
 	double a,b,c,delta,x1,x2;
 	system("CLS");
 	cout<<"-----------\n|Zadanie 1|\n-----------\n";
@@ -55,7 +56,7 @@ void zadanie1(){
 	b = 0;
 	c = 0;
 }
-void zadanie2(){
+void zadanie2(){ //sprawdzanie czy data jest poprawna
 	system("CLS");
 	int dzien,miesiac,rok;
 	cout<<"-----------\n|Zadanie 2|\n-----------\n";
@@ -97,42 +98,64 @@ void zadanie2(){
 	miesiac = 0;
 	rok = 0;
 }
-void zadanie3(){
+void zadanie3a(){ //wyliczanie wymiarów kuli w tabeli - wariant pierwszy z bibliotece stdio.h
 	system("CLS");
 	int min,max,wiersze;
-	cout<<"-----------\n|Zadanie 3|\n-----------\n";
-	cout<<"Podaj minimalny promien kola: ";
+	printf("------------\n|Zadanie 3a|\n------------\n");
+	printf("Podaj minimalny promien kuli: ");
+	scanf("%d",&min);
+	printf("Podaj maksymalny promien kuli: ");
+	scanf("%d",&max);
+	printf("Podaj ilosc wierszy: ");
+	scanf("%d",&wiersze);
+	printf("===================================================\n");
+	printf("| Lp | Promien | Pole powierzchni | Objetosc kuli |\n");
+	printf("===================================================\n");
+	float promien[wiersze-1],pole[wiersze-1],objetosc[wiersze-1];
+	for (int i = 0; i < wiersze; i++){
+		promien[i] = min + (((abs(max - min))*(i))/float(wiersze-1));
+		pole[i] = 4*M_PI*pow(promien[i],2);
+		objetosc[i] = (4/3)*M_PI*pow(promien[i],3);
+		printf("|%3d ",i+1);
+		printf("|%8.2f ",promien[i]);
+		printf("|%17.2f ",pole[i]);
+		printf("|%14.2f |\n",objetosc[i]);
+	}
+	printf("===================================================\n");
+	system("pause");
+}
+void zadanie3b(){ //wyliczanie wymiarów kuli w tabeli - wariant drugi z bibliotece iostream FUNKCJA NIE JEST W PE£NI SPRAWNA
+	system("CLS");
+	int min,max,wiersze;
+	cout<<"------------\n|Zadanie 3b|\n------------\n";
+	cout<<"Podaj minimalny promien kuli: ";
 	cin>>min;
-	cout<<"Podaj maksymalny promien kola: ";
+	cout<<"Podaj maksymalny promien kuli: ";
 	cin>>max;
 	cout<<"Podaj ilosc wierszy: ";
 	cin>>wiersze;
-	cout<<"====================================\n";
-	cout<<"| Lp | Promien | Obwod | Pole kola |\n";
-	cout<<"====================================\n";
-	float promien[wiersze-1],obwod[wiersze-1],pole[wiersze-1];
+	cout<<"===================================================\n";
+	cout<<"| Lp | Promien | Pole powierzchni | Objetosc kuli |\n";
+	cout<<"===================================================\n";
+	float promien[wiersze-1],pole[wiersze-1],objetosc[wiersze-1];
 	for (int i = 0; i < wiersze; i++){
 		promien[i] = min + (((abs(max - min))*(i))/float(wiersze-1));
-		//promien[i] = round(promien[i]*100)/100;
+		pole[i] = 4*M_PI*pow(promien[i],2);
+		objetosc[i] = (4/3)*M_PI*pow(promien[i],3);
+		
+		cout.setf( ios::showpoint );
+		
+		cout<<"|";
+		cout<<setw(3)<<i+1<<" |";
+		cout<<setw(8)<<right<<setprecision(3)<<promien[i]<<" |";
+		cout<<setw(17)<<right<<setprecision(3)<<pole[i]<<" |";
+		cout<<setw(14)<<right<<setprecision(3)<<objetosc[i]<<" |";
+		cout<<endl;
 	}
-	for (int i = 0; i < wiersze; i++){
-		obwod[i] = 2*M_PI*promien[i];
-		//obwod[i] = round(obwod[i]*100)/100;
-	}
-	for (int i = 0; i < wiersze; i++){
-		pole[i] = M_PI*pow(promien[i],2);
-		//pole[i] = round(pole[i]*100)/100;
-	}
-	for (int i = 0; i < wiersze; i++){
-		printf("|%3d ",i+1);
-		printf("|%8.2f ",promien[i]);
-		printf("|%6.2f ",obwod[i]);
-		printf("|%10.2f |\n",pole[i]);
-	}
-	cout<<"====================================\n";
+	cout<<"===================================================\n";
 	system("pause");
 }
-void zadanie4(){
+void zadanie4(){ //algorytm
 	system("CLS");
 	cout<<"-----------\n|Zadanie 4|\n-----------\n";
 	int n,n1,iteracja = 0;
@@ -151,10 +174,10 @@ void zadanie4(){
 	}
 	system("pause");	
 }
-void zadanie5a(){
+void zadanie5a(){ //losowanie ca³kowite
 	system("CLS");
 	cout<<"------------\n|Zadanie 5b|\n------------\n";
-	int min, max,losMin,losMax;
+	int min, max,losMin,losMax,suma = 0,srednia;
 	cout<<"Podaj calkowity poczatek przedzialu losowania: ";
 	cin>>min;
 	cout<<"Podaj calkowity koniec przedzialu losowania: ";
@@ -167,6 +190,7 @@ void zadanie5a(){
 		for(int i  = 0; i < 20; i++){
 			int temp = (rand()%(max-min+1))+min;
 			cout<<temp<<endl;
+			suma+=temp;
 			if(temp < losMin){
 				losMin = temp;
 			}
@@ -177,17 +201,18 @@ void zadanie5a(){
 	}else{
 		cout<<"Nieprawidlowo zdefiniowano przedzial\n";
 	}
-	cout<<"\nNajwieksza z wylosowanych liczb to "<<losMin<<", a najwieksza to "<<losMax<<endl<<endl;
+	srednia = suma/20;
+	cout<<"\nNajmniejsza z wylosowanych liczb to "<<losMin<<", a najwieksza to "<<losMax<<endl<<"Wartosc srednia to: "<<srednia<<endl;
 	min = 0;
 	max = 0;
 	losMin = 0;
 	losMax = 0;
 	system("pause");
 }
-void zadanie5b(){
+void zadanie5b(){ //losowanie rzeczywiste
 	system("CLS");
 	cout<<"------------\n|Zadanie 5b|\n------------\n";
-	double min, max,losMin,losMax;
+	double min, max,losMin,losMax,suma = 0,srednia;
 	cout<<"Podaj calkowity poczatek przedzialu losowania: ";
 	cin>>min;
 	cout<<"Podaj calkowity koniec przedzialu losowania: ";
@@ -200,6 +225,7 @@ void zadanie5b(){
 		for(int i  = 0; i < 20; i++){
 			double temp = min + (max-min)*rand()/((double)RAND_MAX);
 			cout<<temp<<endl;
+			suma+=temp;
 			if(temp < losMin){
 				losMin = temp;
 			}
@@ -210,7 +236,8 @@ void zadanie5b(){
 	}else{
 		cout<<"Nieprawidlowo zdefiniowano przedzial\n";
 	}
-	cout<<"\nNajwieksza z wylosowanych liczb to "<<losMin<<", a najwieksza to "<<losMax<<endl<<endl;
+	srednia = suma/20;
+	cout<<"\nNajmniejsza z wylosowanych liczb to "<<losMin<<", a najwieksza to "<<losMax<<endl<<"Wartosc srednia to: "<<srednia<<endl;
 	min = 0;
 	max = 0;
 	losMin = 0;
@@ -222,14 +249,15 @@ bool dzialaj = true;
 	do{
 	int nr_zadania;
 	system("CLS");
-	cout<<"Autor: Tomasz Rzymyszkiewicz \nGrupa: SR/P 15:15 \nTemat: Zadania - Laboratorium 1 \nData: 16.10.2019\n";
+	cout<<"Autor: Tomasz Rzymyszkiewicz \nGrupa: SR/P 15:15 \nTemat: Zadania - Laboratorium 2 \nData: 30.10.2019\n";
 	cout<<"\n-----------------\n|Wybierz zadanie|\n-----------------\n";
 	cout<<"1. Rozwiazaywanie rownania kwadratowego\n";
 	cout<<"2. Sprawdzanie czy wpisana data jest poprawna\n";
-	cout<<"3. Wyswietlanie tabeli w wymiarami kol\n";
-	cout<<"4. Algorytm Hofstadtera\n";
-	cout<<"5. Losowanie liczb ca³kowitych w zakresie\n";
-	cout<<"6. Losowanie liczb rzeczywistych w zakresie\n";
+	cout<<"3. Wyswietlanie tabeli w wymiarami kul - biblioteka stdio.h\n";
+	cout<<"4. Wyswietlanie tabeli w wymiarami kul - biblioteka iostream\n";
+	cout<<"5. Algorytm Hofstadtera\n";
+	cout<<"6. Losowanie liczb calkowitych w zakresie\n";
+	cout<<"7. Losowanie liczb rzeczywistych w zakresie\n";
 	cout<<"ESC. Wyjscie\n";
 	nr_zadania=getch();
 	cout<<endl;
@@ -242,15 +270,18 @@ bool dzialaj = true;
 		zadanie2();
 		break;
 	case '3':
-		zadanie3();
+		zadanie3a();
 		break;
 	case '4':
-		zadanie4();
+		zadanie3b();
 		break;
 	case '5':
-		zadanie5a();
+		zadanie4();
 		break;
 	case '6':
+		zadanie5a();
+		break;
+	case '7':
 		zadanie5b();
 		break;
 	case 27: 

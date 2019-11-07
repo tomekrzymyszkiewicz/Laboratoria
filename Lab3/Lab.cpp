@@ -9,7 +9,6 @@ Data:
 #include <windows.h>
 #include <conio.h>
 #include <stdlib.h>
-
 using namespace std;
 void zadanie1(){
 	system("CLS");
@@ -67,14 +66,12 @@ void zadanie2(){
 }
 int nwd(int a, int b){
 	int temp;
-    
 	while(b!=0)
     {
 		temp = b;
 		b = a%b;
 		a = temp;	
 	}
-	
     return a;	
 }
 int nww(int a, int b){
