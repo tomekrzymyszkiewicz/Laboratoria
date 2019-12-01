@@ -90,7 +90,7 @@ void zadanie3(){
 	cout<<"-----------\n|Zadanie 3|\n-----------\n";
 	cout<<"Program wyliczajacy NWD i NWW dla podanych licz calkowitych a i b\n";
 	cout<<"Podaj a: ";
-	int a,b;
+	int a = 0,b = 0;
 	cin>>a;
 	cout<<"Podaj b: ";
 	cin>>b;
@@ -102,9 +102,9 @@ void zadanie4(){
 	cout<<"-----------\n|Zadanie 4|\n-----------\n";
 	cout<<"Program sumujacy cyfry podanej liczby\n";
 	cout<<"Podaj liczbe: ";
-	unsigned long liczba = 0, suma = 0;
+	unsigned long long liczba = 0, suma = 0;
 	cin>>liczba;
-	while(liczba){
+	while(liczba != 0){
 		suma+=liczba%10;
 		liczba/=10;
 	}
