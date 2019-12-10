@@ -8,9 +8,11 @@ Data: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 #include <stdio.h>
 #include <windows.h>
 #include <conio.h>
-#define ROZMIAR 5
+#include <ctime>
+#include <stdlib.h>
+#define ROZMIAR 20
 using namespace std;
-float tablica[ROZMIAR];
+float tablica[ROZMIAR]={0};
 void wczytaj(){ //WCZYTANIE DANYCH
 	system("CLS");
 	printf("Wczytywanie danych do tablicy %d-elementowej\n",ROZMIAR);
@@ -27,7 +29,7 @@ void wypisz(){ //WYPISANIE DANYCH
 	for(int i = 0; i < ROZMIAR; i++){
 		printf("  %.1f",tablica[i]);
 	}
-	printf("]");
+	printf("]\n");
 	system("pause");
 }
 void zadanie1(){ //LISTA SPRAWDZEÑ Z ZADANIA 1
@@ -75,13 +77,75 @@ void zadanie1(){ //LISTA SPRAWDZEÑ Z ZADANIA 1
 	}
 	system("pause");
 }
+void zadanie2(){
+	system("CLS");
+	printf("Podaj zakres losowania w postaci [a;b]\n");
+	float a = 0, b = 0;
+	printf("a = ");
+	scanf("%f",&a);
+	printf("b = ");
+	scanf("%f",&b);
+	srand(time(NULL));
+	for(int i = 0; i < ROZMIAR; i++){
+		tablica[i] = a + (b - a)*rand()/((double)RAND_MAX);
+	}
+	system("pause");
+	
+}
+void sortowanie(){
+	float temp;
+	for(int i = 0; i < ROZMIAR; i++){
+		for(int j = 0; j < ROZMIAR-1; j++){
+			if(tablica[j]>tablica[j+1]){
+				temp = tablica[j];
+				tablica[j] = tablica[j+1];
+				tablica[j+1] = temp;
+			}
+		}	
+	}
+	system("CLS");
+	printf("Tablica zostala posortowana\n");
+	system("pause");
+}
 int main()
 {
 	bool dzialaj = true;
 	while(dzialaj){
-	wczytaj();
-	wypisz();
-	zadanie1();
+	int nr_zadania;
+	system("CLS");
+	cout<<"Autor: Tomasz Rzymyszkiewicz \nGrupa: SR/P 15:15 \nTemat: Zadania - Laboratorium 4 \nData: XXXXXXXXXXXXXXX\n";
+	cout<<"\n-----------------\n|Wybierz operacje|\n-----------------\n";
+	cout<<"1. Wczytaj dane do tablicy\n";
+	cout<<"2. Wyswietla zawartosc tablicy\n";
+	cout<<"3. Sprawdz tablice\n";
+	cout<<"4. Wypelnij zablice liczbami losowymi z zakresu\n";
+	cout<<"5. Posortuj tablice\n";
+	cout<<"ESC. Wyjscie\n";
+	nr_zadania=getch();
+	cout<<endl;
+	switch(nr_zadania)
+	{
+	case '1':
+		wczytaj();
+		break;
+	case '2':
+		wypisz();
+		break;
+	case '3':
+		zadanie1();
+		break;	
+	case '4':
+		zadanie2();
+		break;
+	case '5':
+		sortowanie();
+		break;
+	case 27: 
+		dzialaj = false;
+		break;
+	default:
+		break;
+	}
 	}
 	return 0;
 }
