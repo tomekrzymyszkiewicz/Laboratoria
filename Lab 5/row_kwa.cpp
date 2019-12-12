@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <math.h>
+#include <iostream>
 
 /**********************************************************************
   Program oblicza pierwiastki rownania kwadratowego
@@ -63,6 +64,8 @@ int main()
   int N;          // liczba pierwiastkow 
 
   CzytajDane(A, B, C);
+  std::cout<<A<<B<<C;
+  system("pause");
   N = ObliczPierwiastki(A, B, C, X1, X2);
   WypiszPierwiastki(N, X1, X2);
   system("PAUSE");
