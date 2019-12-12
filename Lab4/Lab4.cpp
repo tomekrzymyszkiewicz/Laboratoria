@@ -2,7 +2,7 @@
 Autor: Tomasz Rzymyszkiewicz
 Grupa: ŒR/P 15:15
 Temat: Zadania - Laboratorium 4
-Data: XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+Data: 11.12.2019
 */
 #include <iostream>
 #include <stdio.h>
@@ -59,22 +59,62 @@ void zadanie1(){ //LISTA SPRAWDZEÑ Z ZADANIA 1
 	if(ileUjemnych > 0){
 		printf("-> srednia liczb ujemnych wynosi %.2f\n",sredniaUjemnych);
 	}
-	for(int i = 0; i < ROZMIAR; i++){
-		if(tablica[i]>tablica[i+1]){
-			break;
+	int j = 0;
+	for(int i = 0; i < ROZMIAR-1; i++){
+		if(tablica[i] == tablica[i+1]){
+			j++;
 		}
-		if(i = ROZMIAR-1){
+		if(j == ROZMIAR-1){
+			printf("Elementy tablicy sa rowne\n");
+			system("pause");
+			return;
+		}
+	}
+	j = 0;
+	for(int i = 0; i < ROZMIAR-1; i++){
+		if(tablica[i] < tablica[i+1]){
+			j++;
+		}
+		if(j == ROZMIAR-1){
 			printf("Elementy tablicy ustawione sa rosnaco\n");
+			system("pause");
+			return;
 		}
 	}
+	j = 0;
 	for(int i = ROZMIAR-1; i > 0; i--){
-		if(tablica[i] > tablica[i-1]){
-			break;
+		if(tablica[i] < tablica[i-1]){
+			j++;
 		}
-		if(i = 1){
+		if(j == ROZMIAR-1){
 			printf("Elementy tablicy ustawione sa malejaco\n");
+			system("pause");
+			return;
 		}
 	}
+	j = 0;
+	for(int i = 0; i < ROZMIAR-1; i++){
+		if(tablica[i] <= tablica[i+1]){
+			j++;
+		}
+		if(j == ROZMIAR-1){
+			printf("Elementy tablicy ustawione sa niemalejaco\n");
+			system("pause");
+			return;
+		}
+	}
+	j = 0;
+	for(int i = ROZMIAR-1; i > 0; i--){
+		if(tablica[i] <= tablica[i-1]){
+			j++;
+		}
+		if(j == ROZMIAR-1){
+			printf("Elementy tablicy ustawione sa nierosnaco\n");
+			system("pause");
+			return;
+		}
+	}
+	printf("Elementy tablicy sa ustawione niemonotonicznie\n");
 	system("pause");
 }
 void zadanie2(){
@@ -89,10 +129,10 @@ void zadanie2(){
 	for(int i = 0; i < ROZMIAR; i++){
 		tablica[i] = a + (b - a)*rand()/((double)RAND_MAX);
 	}
-	system("pause");
-	
+	system("pause");	
 }
-void sortowanie(){
+
+void sortowanieBubbleSort(){
 	float temp;
 	for(int i = 0; i < ROZMIAR; i++){
 		for(int j = 0; j < ROZMIAR-1; j++){
@@ -107,19 +147,58 @@ void sortowanie(){
 	printf("Tablica zostala posortowana\n");
 	system("pause");
 }
+/*
+int partition(float tablica[], int p, int r) // dzielimy tablice na dwie czesci, w pierwszej wszystkie liczby sa mniejsze badz rowne x, w drugiej wieksze lub rowne od x
+{
+int x = tablica[p]; // obieramy x
+int i = p, j = r, w; // i, j - indeksy w tabeli
+while (true) // petla nieskonczona - wychodzimy z niej tylko przez return j
+{
+while (tablica[j] > x) // dopoki elementy sa wieksze od x
+j--;
+while (tablica[i] < x) // dopoki elementy sa mniejsze od x
+i++;
+if (i < j) // zamieniamy miejscami gdy i < j
+{
+w = tablica[i];
+tablica[i] = tablica[j];
+tablica[j] = w;
+i++;
+j--;
+}
+else // gdy i >= j zwracamy j jako punkt podzialu tablicy
+return j;
+}
+}
+ 
+void quicksort(float tablica[], int p, int r) // sortowanie szybkie
+{
+int q;
+if (p < r)
+{  
+q = partition(tablica,p,r); // dzielimy tablice na dwie czesci; q oznacza punkt podzialu
+quicksort(tablica, p, q); // wywolujemy rekurencyjnie quicksort dla pierwszej czesci tablicy
+quicksort(tablica, q+1, r); // wywolujemy rekurencyjnie quicksort dla drugiej czesci tablicy
+}
+}
+*/
+void sortowanieMergeSort(){
+	
+}
 int main()
 {
 	bool dzialaj = true;
 	while(dzialaj){
 	int nr_zadania;
 	system("CLS");
-	cout<<"Autor: Tomasz Rzymyszkiewicz \nGrupa: SR/P 15:15 \nTemat: Zadania - Laboratorium 4 \nData: XXXXXXXXXXXXXXX\n";
+	cout<<"Autor: Tomasz Rzymyszkiewicz \nGrupa: SR/P 15:15 \nTemat: Zadania - Laboratorium 4 \nData: 11.12.2019\n";
 	cout<<"\n-----------------\n|Wybierz operacje|\n-----------------\n";
 	cout<<"1. Wczytaj dane do tablicy\n";
 	cout<<"2. Wyswietla zawartosc tablicy\n";
 	cout<<"3. Sprawdz tablice\n";
 	cout<<"4. Wypelnij zablice liczbami losowymi z zakresu\n";
-	cout<<"5. Posortuj tablice\n";
+	cout<<"5. Posortuj tablice algorytmem BubbleSort\n";
+	cout<<"6. Posortuj tablice algorytmem QuickSort\n";
 	cout<<"ESC. Wyjscie\n";
 	nr_zadania=getch();
 	cout<<endl;
@@ -138,8 +217,10 @@ int main()
 		zadanie2();
 		break;
 	case '5':
-		sortowanie();
+		sortowanieBubbleSort();//KILKA ALGORYTMÓW SORTOWANIA
 		break;
+	case '6':
+		//quicksort(tablica,0,ROZMIAR-1);
 	case 27: 
 		dzialaj = false;
 		break;
