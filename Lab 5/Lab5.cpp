@@ -1,8 +1,6 @@
-#include <iostream>
 #include <stdio.h>
 #include <windows.h>
 using namespace std;
-
 void czytajRownanie(float &a, float &b, float &c){
 	system("CLS");
 	printf("Wczytywanie rownania w postaci:\n\n");
@@ -21,12 +19,12 @@ float obliczWyznacznik(float p1, float p2, float p3, float p4){
 	return p1*p4-p2*p3;
 }
 int obliczRozwiazanie(float a1, float b1, float c1, float a2, float b2, float c2, float &x, float &y){
-	float W,Wx,Wy;
+	float W,Wx,Wy; //wyznaczniki
 	W = obliczWyznacznik(a1,b1,a2,b2);
 	Wx = obliczWyznacznik(c1,b1,c2,b2);
 	Wy = obliczWyznacznik(a1,c1,a2,c2);
-	printf("W = %.2f Wx = %.2f Wy = %.2f \n",W,Wx,Wy);
-	system("pause");
+	//printf("W = %.2f Wx = %.2f Wy = %.2f \n",W,Wx,Wy);
+	//system("pause");
 	if(W == 0 && Wx == 0 && Wy == 0){
 		return 2;
 	}else
@@ -66,14 +64,12 @@ void wypiszRozwiazanie(int n, float &x, float &y){
 			break;
 	}
 }
-
 int main(){
 	float a1=0, b1=0, c1=0; //wspó³czynniki pierwszego równania
 	float a2=0, b2=0, c2=0; //wspó³czynniki drugiego rówania
 	float x = 0, y = 0; // rozwi¹zania uk³adu równañ
 	int n; //liczba rozwi¹zañ uk³adu
 	//0 - sprzeczny; 1 - oznaczony; 2 - nieoznaczony
-	
 	czytajRownanie(a1,b1,c1);
 	czytajRownanie(a2,b2,c2);
 	system("cls");

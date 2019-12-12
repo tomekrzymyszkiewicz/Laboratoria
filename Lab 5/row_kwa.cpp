@@ -64,7 +64,7 @@ int main()
   int N;          // liczba pierwiastkow 
 
   CzytajDane(A, B, C);
-  std::cout<<A<<B<<C;
+  .//std::cout<<A<<B<<C;
   system("pause");
   N = ObliczPierwiastki(A, B, C, X1, X2);
   WypiszPierwiastki(N, X1, X2);
