@@ -12,7 +12,8 @@ Data: 11.12.2019
 #include <stdlib.h>
 #define ROZMIAR 20
 using namespace std;
-float tablica[ROZMIAR]={0};
+float tablica[ROZMIAR]={0}; //TABLICA G£ÓWNA
+float t[ROZMIAR]={0};//TABLICA POMOCNICZA DO DZIA£ANIA MERGE SORT
 void wczytaj(){ //WCZYTANIE DANYCH
 	system("CLS");
 	printf("Wczytywanie danych do tablicy %d-elementowej\n",ROZMIAR);
@@ -117,7 +118,7 @@ void zadanie1(){ //LISTA SPRAWDZEÑ Z ZADANIA 1
 	printf("Elementy tablicy sa ustawione niemonotonicznie\n");
 	system("pause");
 }
-void zadanie2(){
+void zadanie2(){//WSTAWIANIE LOSOWYCH WARTOŒCI Z PODANEGO ZAKRESU
 	system("CLS");
 	printf("Podaj zakres losowania w postaci [a;b]\n");
 	float a = 0, b = 0;
@@ -132,7 +133,7 @@ void zadanie2(){
 	system("pause");	
 }
 
-void sortowanieBubbleSort(){
+void sortowanieBubbleSort(){//SORTOWANIE BUBBLESORT
 	float temp;
 	for(int i = 0; i < ROZMIAR; i++){
 		for(int j = 0; j < ROZMIAR-1; j++){
@@ -147,43 +148,48 @@ void sortowanieBubbleSort(){
 	printf("Tablica zostala posortowana\n");
 	system("pause");
 }
-/*
-int partition(float tablica[], int p, int r) // dzielimy tablice na dwie czesci, w pierwszej wszystkie liczby sa mniejsze badz rowne x, w drugiej wieksze lub rowne od x
-{
-int x = tablica[p]; // obieramy x
-int i = p, j = r, w; // i, j - indeksy w tabeli
-while (true) // petla nieskonczona - wychodzimy z niej tylko przez return j
-{
-while (tablica[j] > x) // dopoki elementy sa wieksze od x
-j--;
-while (tablica[i] < x) // dopoki elementy sa mniejsze od x
-i++;
-if (i < j) // zamieniamy miejscami gdy i < j
-{
-w = tablica[i];
-tablica[i] = tablica[j];
-tablica[j] = w;
-i++;
-j--;
+void quick_sort(float *tab, int lewy, int prawy){//SORTOWANIE QUICK SORT
+	if(prawy <= lewy) return;
+	int i = lewy - 1, j = prawy + 1;
+	float pivot = tab[(lewy+prawy)/2]; 
+	while(1)
+	{
+		while(pivot>tab[++i]);
+		while(pivot<tab[--j]);
+		if( i <= j){
+			float tmp = tab[i];
+			tab[i] = tab[j];
+			tab[j] = tmp;
+		}
+		else
+			break;
+	}
+
+	if(j > lewy)
+	quick_sort(tab, lewy, j);
+	if(i < prawy)
+	quick_sort(tab, i, prawy);
 }
-else // gdy i >= j zwracamy j jako punkt podzialu tablicy
-return j;
+void merge(int pocz, int sr, int kon){
+int i,j,q;
+for (i=pocz; i<=kon; i++) t[i]=tablica[i];  
+i=pocz; j=sr+1; q=pocz;                
+while (i<=sr && j<=kon) {       
+if (t[i]<t[j])
+tablica[q++]=t[i++];
+else
+tablica[q++]=t[j++];
 }
+while (i<=sr) tablica[q++]=t[i++];
 }
- 
-void quicksort(float tablica[], int p, int r) // sortowanie szybkie
-{
-int q;
-if (p < r)
-{  
-q = partition(tablica,p,r); // dzielimy tablice na dwie czesci; q oznacza punkt podzialu
-quicksort(tablica, p, q); // wywolujemy rekurencyjnie quicksort dla pierwszej czesci tablicy
-quicksort(tablica, q+1, r); // wywolujemy rekurencyjnie quicksort dla drugiej czesci tablicy
+void mergesort(int pocz, int kon){//SORTOWANIE MERGESORT
+int sr;
+if (pocz<kon) {
+sr=(pocz+kon)/2;
+mergesort(pocz, sr);    
+mergesort(sr+1, kon);   
+merge(pocz, sr, kon);   
 }
-}
-*/
-void sortowanieMergeSort(){
-	
 }
 int main()
 {
@@ -191,7 +197,7 @@ int main()
 	while(dzialaj){
 	int nr_zadania;
 	system("CLS");
-	cout<<"Autor: Tomasz Rzymyszkiewicz \nGrupa: SR/P 15:15 \nTemat: Zadania - Laboratorium 4 \nData: 11.12.2019\n";
+	cout<<"Autor: Tomasz Rzymyszkiewicz \nGrupa: SR/P 15:15 \nTemat: Zadania - Laboratorium 4 \nData: 11.12.2019";
 	cout<<"\n-----------------\n|Wybierz operacje|\n-----------------\n";
 	cout<<"1. Wczytaj dane do tablicy\n";
 	cout<<"2. Wyswietla zawartosc tablicy\n";
@@ -199,6 +205,7 @@ int main()
 	cout<<"4. Wypelnij zablice liczbami losowymi z zakresu\n";
 	cout<<"5. Posortuj tablice algorytmem BubbleSort\n";
 	cout<<"6. Posortuj tablice algorytmem QuickSort\n";
+	cout<<"7. Posortuj tablice algorytmem MergeSort\n";
 	cout<<"ESC. Wyjscie\n";
 	nr_zadania=getch();
 	cout<<endl;
@@ -217,10 +224,20 @@ int main()
 		zadanie2();
 		break;
 	case '5':
-		sortowanieBubbleSort();//KILKA ALGORYTMÓW SORTOWANIA
+		sortowanieBubbleSort();
 		break;
 	case '6':
-		//quicksort(tablica,0,ROZMIAR-1);
+		quick_sort(tablica,0,ROZMIAR-1);
+		system("CLS");
+		printf("Tablica zostala posortowana\n");
+		system("pause");
+		break;
+	case '7':
+		mergesort(0,ROZMIAR-1);
+		system("CLS");
+		printf("Tablica zostala posortowana\n");
+		system("pause");
+		break;
 	case 27: 
 		dzialaj = false;
 		break;
