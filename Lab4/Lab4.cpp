@@ -132,7 +132,6 @@ void zadanie2(){//WSTAWIANIE LOSOWYCH WARTOŒCI Z PODANEGO ZAKRESU
 	}
 	system("pause");	
 }
-
 void sortowanieBubbleSort(){//SORTOWANIE BUBBLESORT
 	float temp;
 	for(int i = 0; i < ROZMIAR; i++){
@@ -164,7 +163,6 @@ void quick_sort(float *tab, int lewy, int prawy){//SORTOWANIE QUICK SORT
 		else
 			break;
 	}
-
 	if(j > lewy)
 	quick_sort(tab, lewy, j);
 	if(i < prawy)

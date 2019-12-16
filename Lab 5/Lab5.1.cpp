@@ -1,3 +1,9 @@
+/*
+Autor: Tomasz Rzymyszkiewicz
+Grupa: ŒR/P 15:15
+Temat: Zadania - Laboratorium 5
+Data: XXXXXXXXXXXXXXXXXXXXXXXX
+*///WEERSJA Z PRZEKAZYWANIEM PRZEZ REFERENCJE
 #include <stdio.h>
 #include <windows.h>
 using namespace std;
