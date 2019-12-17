@@ -17,5 +17,18 @@ int main()
 	printf("\nmoj_strlen = %d\n",moj_strlen(tab1));
 	for(int i = 0; i < moj_strlen(tab2); i++) printf("%c",tab2[i]);
 	printf("\nmoj_strlen = %d\n",moj_strlen(tab2));
+	//-----------------------
+	
 	return 0;
 }
+
+/*
+argument domnieany funckji 
+dynamiczne tworzenie tablcy dwuwymoarowej
+switch
+porównanie sta³a tekstowa
+przeboriony for zakresy widodcznoœci
+przeysniecie bitowe
+rzutowanie liczb i znaków
+zwracanie wartosci i intkrementacja
+*/
