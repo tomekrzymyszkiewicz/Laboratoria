@@ -18,28 +18,39 @@ void moj_strcpy(char tab1[],char tab2[]){
 	}
 	tab1[i] = '\0';
 }
+int moj_strcmp(char tab1[],char tab2[]){
+	int i = 0;
+	while(tab1[i]==tab2[i]){
+		i++;
+	}
+	if((int)tab1[i]>(int)tab2[i]){
+		return (int)tab1[i]-(int)tab2[i];
+	}else
+	if((int)tab1[i]<(int)tab2[i]){
+		return (int)tab1[i]-(int)tab2[i];
+	}else
+	return 0;
+}
 int main()
 {
-	/*
-	//TEST FUNCKJI moj_strlen
+	printf("TEST FUNCKJI moj_strlen\n");
 	char tab1[] = "ala ma kota";
 	char tab2[10] = "ala";
-	printf("Test funkcji moj_strlen\n");
 	for(int i = 0; i < moj_strlen(tab1); i++) printf("%c",tab1[i]);
 	printf("\nmoj_strlen = %d\n",moj_strlen(tab1));
 	for(int i = 0; i < moj_strlen(tab2); i++) printf("%c",tab2[i]);
 	printf("\nmoj_strlen = %d\n",moj_strlen(tab2));
-	//-----------------------
-	*/
-	/*
-	//TEST FUNCKJI moj_strlen
+	printf("\nFUNCKJI moj_strcpy\n");
 	char tab3[] = "123hvhvhjvhvhvhvhvh45";
 	char tab4[] = "qwertvgvy";
-	printf("%s\n%s\n\n",tab3,tab4);
+	printf("str1 %s\nstr2 %s\n\n",tab3,tab4);
 	moj_strcpy(tab3,tab4);
-	printf("%s\n%s\n",tab3,tab4);
-	*/
-	
+	printf("str1 %s\nstr2 %s\n",tab3,tab4);
+	printf("\nFUNCKJI moj_strcmp\n");
+	char tab5[] = "12435bjbjk";
+	char tab6[] = "12434hvyvy";
+	printf("str1 %s\nstr2 %s\n",tab5,tab6);
+	printf("moj_strcmp = %d",moj_strcmp(tab5,tab6));
 	
 	
 	return 0;
