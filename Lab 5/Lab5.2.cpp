@@ -1,24 +1,21 @@
 #include <string.h>
 #include <stdio.h>
-int moj_strlen(char tablica[]){
+int moje_strlen(char * tablica){
 	int licznik = 0;
 	while(tablica[licznik] != '\0'){
 		licznik++;
 	}
 	return licznik;
 }
-void moj_strcpy(char tab1[],char tab2[]){
-	int tab2_length = 0;
-	while(tab2[tab2_length] != '\0'){
-		tab2_length++;
-	}
+char * moje_strcpy(char * tab1,char * tab2){
 	int i = 0;
-	for(i = 0; i < tab2_length; i ++){
+	do{
 		tab1[i] = tab2[i];
 	}
-	tab1[i] = '\0';
+	while(tab2[i++] != '\0');
+	return tab1;
 }
-int moj_strcmp(char tab1[],char tab2[]){
+int moje_strcmp(char * tab1,char * tab2){
 	int i = 0;
 	while(tab1[i]==tab2[i]){
 		i++;
@@ -31,38 +28,73 @@ int moj_strcmp(char tab1[],char tab2[]){
 	}else
 	return 0;
 }
+char * moje_strchr (char * tab, int znak){
+	
+	while( *tab != (char)znak){
+		tab++;
+	}
+	return tab;
+	
+}
+char * moje_strupr(char * tab){
+	for(int i = 0; tab[i] != '\0'; i++){
+		if((int)tab[i] >= 'a' && (int)tab[i] <= 'z')
+		tab[i] -= 32;
+	}
+	return tab;
+}
+char * moje_strlwr(char * tab){
+	for(int i = 0; tab[i] != '\0'; i++){
+		if((int)tab[i] >= 'A' && (int)tab[i] <= 'Z')
+		tab[i] += 32;
+	}
+	return tab;
+}
 int main()
 {
-	printf("TEST FUNCKJI moj_strlen\n");
+	printf("TEST FUNCKJI moje_strlen\n");
 	char tab1[] = "ala ma kota";
 	char tab2[10] = "ala";
-	for(int i = 0; i < moj_strlen(tab1); i++) printf("%c",tab1[i]);
-	printf("\nmoj_strlen = %d\n",moj_strlen(tab1));
-	for(int i = 0; i < moj_strlen(tab2); i++) printf("%c",tab2[i]);
-	printf("\nmoj_strlen = %d\n",moj_strlen(tab2));
-	printf("\nFUNCKJI moj_strcpy\n");
+	for(int i = 0; i < moje_strlen(tab1); i++) printf("%c",tab1[i]);
+	printf("\nmoje_strlen = %d\n",moje_strlen(tab1));
+	for(int i = 0; i < moje_strlen(tab2); i++) printf("%c",tab2[i]);
+	printf("\nmoje_strlen = %d\n",moje_strlen(tab2));
+
+	printf("\nFUNCKJI moje_strcpy\n");
 	char tab3[] = "123hvhvhjvhvhvhvhvh45";
 	char tab4[] = "qwertvgvy";
 	printf("str1 %s\nstr2 %s\n\n",tab3,tab4);
-	moj_strcpy(tab3,tab4);
+	moje_strcpy(tab3,tab4);
 	printf("str1 %s\nstr2 %s\n",tab3,tab4);
-	printf("\nFUNCKJI moj_strcmp\n");
+	
+	printf("\nFUNCKJI moje_strcmp\n");
 	char tab5[] = "12435bjbjk";
 	char tab6[] = "12434hvyvy";
 	printf("str1 %s\nstr2 %s\n",tab5,tab6);
-	printf("moj_strcmp = %d",moj_strcmp(tab5,tab6));
-	
-	
+	printf("moje_strcmp = %d\n",moje_strcmp(tab5,tab6));
+	/*
+	printf("\nFUNCKJI moje_strchr\n");
+	char str[] = "This is a sample string";
+	char * pch;
+	printf ("Looking for the 's' character in \"%s\"...\n",str);
+	pch = moje_strchr(str,'s');
+	while (pch!=NULL)
+	{
+    	printf ("found at %d\n",pch-str+1);
+    	pch=moje_strchr(pch+1,'s');
+	}
+  */
+    printf("\nFUNCKJI moje_strupr\n");
+    char tab7[] = "tekst z malych i WIELKCH liter";
+    printf("%s\n",tab7);
+    moje_strupr(tab7);
+    printf("moje_strupr = %s\n",tab7);
+    
+    printf("\nFUNCKJI moje_strupr\n");
+    char tab8[] = "tekst z malych i WIELKICH liter";
+    printf("%s\n",tab8);
+    moje_strlwr(tab8);
+    printf("moje_strlwr = %s",tab8);
+    
 	return 0;
 }
-
-/*
-argument domnieany funckji 
-dynamiczne tworzenie tablcy dwuwymoarowej
-switch
-porównanie sta³a tekstowa
-przeboriony for zakresy widodcznoœci
-przeysniecie bitowe
-rzutowanie liczb i znaków
-zwracanie wartosci i intkrementacja
-*/
