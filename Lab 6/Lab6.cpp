@@ -10,7 +10,7 @@ struct Towar
 };
 
 Towar* Tab = NULL;
-int Rozmiar = 0;
+int Ro*zmiar = 0;
 
 void nowaTablica(){
 	system("CLS");
