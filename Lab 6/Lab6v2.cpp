@@ -16,8 +16,6 @@ struct Towar
 	float cena;
 	int ilosc;
 };
-
-
 void nowaTablica(int &Rozmiar, Towar **Tab);
 void wypiszTablice(int &Rozmiar,Towar **Tab);
 void dopiszRekord(int &Rozmiar,Towar **Tab);
@@ -63,62 +61,43 @@ int main()
 	
 	return 0;
 }
-
 void nowaTablica(int &Rozmiar, Towar** Tab){
 	if (*Tab != NULL)
         free(*Tab);
 	system("CLS");
-    cout << "Wprowadz rozmiar tablicy: ";
+    printf("Wprowadz rozmiar tablicy: ");
     cin >> Rozmiar;
-    cout << endl;
-
     *Tab = (Towar*) malloc(Rozmiar*sizeof(Towar));
     cin.get();
-
     for (int i = 0; i < Rozmiar; ++i)
     {
-        cout << "Towar nr" << i+1 << endl << endl;
-
-        cout << "Nazwa: ";
+    	system("CLS");
+        printf("Towar %d\n",i+1);
+        printf("Nazwa: ");
         cin.getline((*Tab)[i].nazwa, 20);
-
-        cout << "Cena: ";
+        printf("Cena: ");
         cin >> (*Tab)[i].ilosc;
-
-        cout << "Ilosc: ";
+        printf("Ilosc: ");
         cin >> (*Tab)[i].cena;
-        cin.get();
-
-        cout << endl << endl;
-
+		printf("Poprawnie wczytano rekord %d z %d\n",i+1,Rozmiar);
+		system("pause");
     }
 }
 
 void wypiszTablice(int &Rozmiar,Towar **Tab){
 	if (*Tab == NULL)
-        cout << "Brak tablicy!";
+        printf("Brak tablicy\n");
 
     else
     {
-        cout << "  NR TOWARU\t|\tNAZWA\t\t|\tCENA\t\t|\tILOSC\t\t |" << endl;
-
-        for (int i = 0; i < 10; ++i)
-            cout << "---------";
-
-        cout << endl;
-
-        for (int i = 0; i < Rozmiar; ++i)
-        {
-            cout << "  " << i+1 << "\t\t|\t" <<(*Tab)[i].nazwa << "\t\t|\t" << (*Tab)[i].cena;
-            cout << "\t\t|\t" << (*Tab)[i].ilosc << "\t\t |\t\t" << endl;
-
-            for (int i = 0; i < 10; ++i)
-                cout << "---------";
-
-            cout << endl;
-        }
+        printf(" lp ||     Nazwa towaru     || Cena jednostkowa || Ilosc ||\n");
+	printf("===========================================================\n");
+	for(int i = 0; i < Rozmiar; i++){
+		printf(" %2d || %20s || %16.2f || %5d ||\n",i+1,(*Tab)[i].nazwa,(*Tab)[i].cena,(*Tab)[i].ilosc);
+	}
     }
 }
+
 
 void dopiszRekord(int &Rozmiar,Towar **Tab){
 	
@@ -147,15 +126,13 @@ void usunRekord(int &Rozmiar,Towar **Tab){
     {
         int n;
 
-        cout << "Podaj nr towaru, który chcesz usunac: ";
+        cout << "Podaj nr rekordu, ktory chcesz usunac: ";
         cin >> n;
-
         if (n == Rozmiar)
         {
             Rozmiar--;
             *Tab = (Towar*)realloc(*Tab, (Rozmiar)*sizeof(Towar));
         }
-
         else if (Rozmiar == 1 && n == 1)
         {
             free(*Tab);
@@ -163,9 +140,6 @@ void usunRekord(int &Rozmiar,Towar **Tab){
             Rozmiar = 0;
 
         }
-
-
-
         else
         {
 
@@ -176,7 +150,6 @@ void usunRekord(int &Rozmiar,Towar **Tab){
                 (*Tab)[i].ilosc = (*Tab)[i+1].ilosc;
 
             }
-
             Rozmiar--;
             *Tab = (Towar*) realloc(*Tab, Rozmiar*sizeof(Towar));
         }
