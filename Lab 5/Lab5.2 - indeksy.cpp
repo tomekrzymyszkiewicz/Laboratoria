@@ -1,3 +1,9 @@
+/*
+Autor: Tomasz Rzymyszkiewicz
+Grupa: ŒR/P 15:15
+Temat: Zadania - Laboratorium 5
+Data: XXXXXXXXXXXXXXXXXXXXXXXX
+*/
 #include <string.h>
 #include <stdio.h>
 int moje_strlen(char * tablica){
@@ -31,6 +37,9 @@ int moje_strcmp(char * tab1,char * tab2){
 char * moje_strchr (char * tab, int znak){
 	
 	while( *tab != (char)znak){
+		if(*tab == '\0'){
+			return NULL;
+		}else
 		tab++;
 	}
 	return tab;
@@ -72,7 +81,7 @@ int main()
 	char tab6[] = "12434hvyvy";
 	printf("str1 %s\nstr2 %s\n",tab5,tab6);
 	printf("moje_strcmp = %d\n",moje_strcmp(tab5,tab6));
-	/*
+	
 	printf("\nFUNCKJI moje_strchr\n");
 	char str[] = "This is a sample string";
 	char * pch;
@@ -83,7 +92,7 @@ int main()
     	printf ("found at %d\n",pch-str+1);
     	pch=moje_strchr(pch+1,'s');
 	}
-  */
+  
     printf("\nFUNCKJI moje_strupr\n");
     char tab7[] = "tekst z malych i WIELKCH liter";
     printf("%s\n",tab7);

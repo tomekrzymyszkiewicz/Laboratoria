@@ -1,3 +1,9 @@
+/*
+Autor: Tomasz Rzymyszkiewicz
+Grupa: ŒR/P 15:15
+Temat: Zadania - Laboratorium 6
+Data: 20.01.2020
+*/
 #include <stdio.h>
 #include <windows.h>
 #include <stdlib.h>
@@ -9,18 +15,18 @@ struct Towar
 	int ilosc;
 };
 
+
 Towar* Tab = NULL;
-int Ro*zmiar = 0;
+int Rozmiar = 0;
 
 void nowaTablica(){
 	system("CLS");
 	printf("Podaj rozmiar tablicy: ");
 	scanf("%d",&Rozmiar);
-	if(Tab == NULL){
+	if(Tab != NULL){
 		delete Tab;
-	}else{
-	Tab = new Towar[Rozmiar];
 	}
+	Tab = new Towar[Rozmiar];
 	for(int i = 0; i < Rozmiar; i++){
 		system("CLS");
 		printf("Rekord %d\nPodaj nazwe towaru: ", i+1);
@@ -49,7 +55,6 @@ void wypiszTablice(){
 }
 
 void dopiszRekord(){
-	
 	Rozmiar++;
 	realloc(Tab,(Rozmiar)*sizeof(Towar));
 	system("CLS");
@@ -74,8 +79,11 @@ void usunRekord(){
 	realloc(Tab,(Rozmiar)*sizeof(Towar));
 	
 }
-
+/*
 void daneTestowe(){
+	if(Tab != NULL){
+		delete Tab;
+	}
 	Tab = new Towar[5];
 	Tab[1] = {"Mleko",1.5,20};
 	Tab[2].nazwa = "Pomidory";
@@ -93,7 +101,7 @@ void daneTestowe(){
 	printf("Poprawnie wczytano dane testowe\n");
 	system("pause");
 }
-
+*/
 int main()
 {
 	bool dzialaj = true;

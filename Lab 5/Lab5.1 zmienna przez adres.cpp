@@ -29,8 +29,6 @@ int obliczRozwiazanie(float a1, float b1, float c1, float a2, float b2, float c2
 	W = obliczWyznacznik(a1,b1,a2,b2);
 	Wx = obliczWyznacznik(c1,b1,c2,b2);
 	Wy = obliczWyznacznik(a1,c1,a2,c2);
-	//printf("W = %.2f Wx = %.2f Wy = %.2f \n",W,Wx,Wy);
-	//system("pause");
 	if(W == 0 && Wx == 0 && Wy == 0){
 		return 2;
 	}else
